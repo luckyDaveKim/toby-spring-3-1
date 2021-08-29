@@ -1,4 +1,4 @@
-package com.springboot.example.dao;
+package com.spring.example.dao;
 
 public class UserDaoFactory {
 

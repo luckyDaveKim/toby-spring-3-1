@@ -1,4 +1,4 @@
-package com.springboot.example.dao;
+package com.spring.example.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

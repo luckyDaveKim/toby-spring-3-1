@@ -1,6 +1,6 @@
-package com.springboot.example.dao;
+package com.spring.example.dao;
 
-import com.springboot.example.domain.User;
+import com.spring.example.domain.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
