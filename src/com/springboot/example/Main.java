@@ -1,5 +1,6 @@
 package com.springboot.example;
 
+import com.springboot.example.dao.NUserDao;
 import com.springboot.example.dao.UserDao;
 import com.springboot.example.domain.User;
 import java.sql.SQLException;
@@ -7,7 +8,7 @@ import java.sql.SQLException;
 public class Main {
 
   public static void main(String[] args) throws SQLException, ClassNotFoundException {
-    UserDao dao = new UserDao();
+    UserDao dao = new NUserDao();
 
     User user = new User();
     user.setId("dave");
