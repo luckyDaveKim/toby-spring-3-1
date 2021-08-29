@@ -1,16 +1,23 @@
 package com.springboot.example.dao;
 
 import com.springboot.example.domain.User;
-
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDao {
 
   public void add(User user) throws ClassNotFoundException, SQLException {
     Class.forName("org.mariadb.jdbc.Driver");
-    Connection c = DriverManager.getConnection("jdbc:mariadb://localhost:3306/spring?useUnicode=true&characterEncoding=utf8mb4", "root", "root");
+    Connection c = DriverManager.getConnection(
+        "jdbc:mariadb://localhost:3306/spring?useUnicode=true&characterEncoding=utf8mb4",
+        "root",
+        "root");
 
-    PreparedStatement ps = c.prepareStatement("insert into users(id, name, password) values(?,?,?)");
+    PreparedStatement ps = c.prepareStatement(
+        "insert into users(id, name, password) values(?,?,?)");
     ps.setString(1, user.getId());
     ps.setString(2, user.getName());
     ps.setString(3, user.getPassword());
@@ -23,7 +30,10 @@ public class UserDao {
 
   public User get(String id) throws ClassNotFoundException, SQLException {
     Class.forName("org.mariadb.jdbc.Driver");
-    Connection c = DriverManager.getConnection("jdbc:mariadb://localhost:3306/spring?useUnicode=true&characterEncoding=utf8mb4", "root", "root");
+    Connection c = DriverManager.getConnection(
+        "jdbc:mariadb://localhost:3306/spring?useUnicode=true&characterEncoding=utf8mb4",
+        "root",
+        "root");
     PreparedStatement ps = c.prepareStatement("select * from users where id = ?");
     ps.setString(1, id);
 
@@ -40,5 +50,4 @@ public class UserDao {
 
     return user;
   }
-
 }

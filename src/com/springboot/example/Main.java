@@ -2,7 +2,6 @@ package com.springboot.example;
 
 import com.springboot.example.dao.UserDao;
 import com.springboot.example.domain.User;
-
 import java.sql.SQLException;
 
 public class Main {
@@ -25,5 +24,4 @@ public class Main {
 
     System.out.println(user2.getId() + " 조회 성공");
   }
-
 }
