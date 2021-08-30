@@ -15,11 +15,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ContextConfiguration(locations = "/emptyContext.xml")
 public class JUnitTest {
 
-  @Autowired
-  ApplicationContext context;
-
   static Set<JUnitTest> testObjects = new HashSet<>();
   static ApplicationContext contextObject = null;
+
+  @Autowired
+  ApplicationContext context;
 
   @Test
   public void contextObjectSeparationTest1() {

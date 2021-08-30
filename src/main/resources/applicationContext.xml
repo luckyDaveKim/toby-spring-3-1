@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.springframework.org/schema/beans"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
 						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
-		<property name="driverClass" value="org.mariadb.jdbc.Driver" />
-		<property name="url" value="jdbc:mariadb://localhost:3306/spring?useUnicode=true&amp;characterEncoding=utf8mb4" />
-		<property name="username" value="root" />
-		<property name="password" value="root" />
-	</bean>
+  <bean class="org.springframework.jdbc.datasource.SimpleDriverDataSource" id="dataSource">
+    <property name="driverClass" value="org.mariadb.jdbc.Driver"/>
+    <property name="url"
+      value="jdbc:mariadb://localhost:3306/spring?useUnicode=true&amp;characterEncoding=utf8mb4"/>
+    <property name="username" value="root"/>
+    <property name="password" value="root"/>
+  </bean>
 
-	<bean id="userDao" class="com.spring.example.dao.UserDao">
-		<property name="dataSource" ref="dataSource" />
-	</bean>
+  <bean id="userDao" class="com.spring.example.dao.UserDao">
+    <property name="dataSource" ref="dataSource"/>
+  </bean>
 </beans>
