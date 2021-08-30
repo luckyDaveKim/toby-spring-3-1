@@ -11,6 +11,6 @@
 	</bean>
 
 	<bean id="userDao" class="com.spring.example.dao.UserDao">
-		<constructor-arg name="dataSource" ref="dataSource" />
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

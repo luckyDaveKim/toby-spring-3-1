@@ -5,16 +5,20 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.spring.example.domain.User;
 import java.sql.SQLException;
+import javax.sql.DataSource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "/applicationContext.xml")
+@DirtiesContext
 public class UserDaoTest {
 
   @Autowired
@@ -26,6 +30,13 @@ public class UserDaoTest {
 
   @BeforeEach
   void setUp() {
+    DataSource dataSource = new SingleConnectionDataSource(
+        "jdbc:mariadb://localhost:3306/spring?useUnicode=true&characterEncoding=utf8mb4",
+        "root",
+        "root",
+        true);
+    dao.setDataSource(dataSource);
+
     user1 = new User("dave", "김민규", "lucky");
     user2 = new User("dave2", "김민규2", "lucky2");
     user3 = new User("dave3", "김민규3", "lucky3");

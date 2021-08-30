@@ -10,9 +10,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 public class UserDao {
 
-  private final DataSource dataSource;
+  private DataSource dataSource;
 
-  public UserDao(DataSource dataSource) {
+  public void setDataSource(DataSource dataSource) {
     this.dataSource = dataSource;
   }
 
