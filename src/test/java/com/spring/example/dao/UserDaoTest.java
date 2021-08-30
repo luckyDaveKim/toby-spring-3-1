@@ -17,8 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(locations = "/applicationContext.xml")
-@DirtiesContext
+@ContextConfiguration(locations = "/test-applicationContext.xml")
 public class UserDaoTest {
 
   @Autowired
@@ -30,13 +29,6 @@ public class UserDaoTest {
 
   @BeforeEach
   void setUp() {
-    DataSource dataSource = new SingleConnectionDataSource(
-        "jdbc:mariadb://localhost:3306/spring?useUnicode=true&characterEncoding=utf8mb4",
-        "root",
-        "root",
-        true);
-    dao.setDataSource(dataSource);
-
     user1 = new User("dave", "김민규", "lucky");
     user2 = new User("dave2", "김민규2", "lucky2");
     user3 = new User("dave3", "김민규3", "lucky3");
