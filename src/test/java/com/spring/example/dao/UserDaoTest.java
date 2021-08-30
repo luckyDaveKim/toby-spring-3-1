@@ -7,20 +7,28 @@ import com.spring.example.domain.User;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(locations = "/applicationContext.xml")
 public class UserDaoTest {
 
+  @Autowired
+  private ApplicationContext context;
+
   private UserDao dao;
+
   private User user1;
   private User user2;
   private User user3;
 
   @BeforeEach
   void setUp() {
-    ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
     dao = context.getBean("userDao", UserDao.class);
 
     user1 = new User("dave", "김민규", "lucky");
