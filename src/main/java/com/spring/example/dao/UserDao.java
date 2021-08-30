@@ -1,6 +1,7 @@
 package com.spring.example.dao;
 
 import com.spring.example.domain.User;
+import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -29,6 +30,17 @@ public class UserDao {
           return user;
         },
         id);
+  }
+
+  public List<User> getAll() {
+    return jdbcTemplate.query("select * from users order by id",
+        (rs, rowNum) -> {
+          User user = new User();
+          user.setId(rs.getString("id"));
+          user.setName(rs.getString("name"));
+          user.setPassword(rs.getString("password"));
+          return user;
+        });
   }
 
   public void deleteAll() {
