@@ -15,12 +15,16 @@ public class UserDaoTest {
     ApplicationContext context = new GenericXmlApplicationContext("applicationContext.xml");
     UserDao dao = context.getBean("userDao", UserDao.class);
 
+    dao.deleteAll();
+    assertThat(dao.getCount()).isEqualTo(0);
+
     User user = new User();
     user.setId("dave");
     user.setName("김민규");
     user.setPassword("lucky");
 
     dao.add(user);
+    assertThat(dao.getCount()).isEqualTo(1);
 
     User user2 = dao.get(user.getId());
     assertThat(user2.getName()).isEqualTo(user.getName());
