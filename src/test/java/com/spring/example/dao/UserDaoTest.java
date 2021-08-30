@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import com.spring.example.domain.User;
-import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,7 +31,7 @@ public class UserDaoTest {
   }
 
   @Test
-  public void addAndGet() throws SQLException {
+  public void addAndGet() {
     dao.deleteAll();
     assertThat(dao.getCount()).isEqualTo(0);
 
@@ -50,7 +49,7 @@ public class UserDaoTest {
   }
 
   @Test
-  public void getUserFailure() throws SQLException {
+  public void getUserFailure() {
     dao.deleteAll();
     assertThat(dao.getCount()).isEqualTo(0);
 
@@ -59,7 +58,7 @@ public class UserDaoTest {
   }
 
   @Test
-  public void count() throws SQLException {
+  public void count() {
     dao.deleteAll();
     assertThat(dao.getCount()).isEqualTo(0);
 
