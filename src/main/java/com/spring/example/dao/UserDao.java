@@ -11,9 +11,14 @@ import org.springframework.dao.EmptyResultDataAccessException;
 public class UserDao {
 
   private DataSource dataSource;
+  private JdbcContext jdbcContext;
 
   public void setDataSource(DataSource dataSource) {
     this.dataSource = dataSource;
+  }
+
+  public void setJdbcContext(JdbcContext jdbcContext) {
+    this.jdbcContext = jdbcContext;
   }
 
   public void add(final User user) throws SQLException {
@@ -26,7 +31,7 @@ public class UserDao {
 
       return ps;
     };
-    jdbcContextWithStatementStrategy(st);
+    jdbcContext.workWithStatementStrategy(st);
   }
 
   public User get(String id) throws SQLException {
@@ -81,7 +86,7 @@ public class UserDao {
 
   public void deleteAll() throws SQLException {
     StatementStrategy st = c -> c.prepareStatement("delete from users");
-    jdbcContextWithStatementStrategy(st);
+    jdbcContext.workWithStatementStrategy(st);
   }
 
   public int getCount() throws SQLException {
@@ -93,17 +98,6 @@ public class UserDao {
     ) {
       rs.next();
       return rs.getInt(1);
-    } catch (SQLException e) {
-      throw e;
-    }
-  }
-
-  private void jdbcContextWithStatementStrategy(StatementStrategy stmt) throws SQLException {
-    try (
-        Connection c = dataSource.getConnection();
-        PreparedStatement ps = stmt.makePreparedStatement(c)
-    ) {
-      ps.executeUpdate();
     } catch (SQLException e) {
       throw e;
     }
