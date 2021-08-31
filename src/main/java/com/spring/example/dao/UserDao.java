@@ -4,10 +4,19 @@ import com.spring.example.domain.User;
 import java.util.List;
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 
 public class UserDao {
 
   private JdbcTemplate jdbcTemplate;
+
+  private final RowMapper<User> userRowMapper = (rs, rowNum) -> {
+    User user = new User();
+    user.setId(rs.getString("id"));
+    user.setName(rs.getString("name"));
+    user.setPassword(rs.getString("password"));
+    return user;
+  };
 
   public void setDataSource(DataSource dataSource) {
     jdbcTemplate = new JdbcTemplate(dataSource);
@@ -22,25 +31,13 @@ public class UserDao {
 
   public User get(String id) {
     return jdbcTemplate.queryForObject("select * from users where id = ?",
-        (rs, rowNum) -> {
-          User user = new User();
-          user.setId(rs.getString("id"));
-          user.setName(rs.getString("name"));
-          user.setPassword(rs.getString("password"));
-          return user;
-        },
+        userRowMapper,
         id);
   }
 
   public List<User> getAll() {
     return jdbcTemplate.query("select * from users order by id",
-        (rs, rowNum) -> {
-          User user = new User();
-          user.setId(rs.getString("id"));
-          user.setName(rs.getString("name"));
-          user.setPassword(rs.getString("password"));
-          return user;
-        });
+        userRowMapper);
   }
 
   public void deleteAll() {
